@@ -59,10 +59,13 @@
         Label:
             text: "How do you feel?"
         TextInput:
-            hint_text: "Things to try: Happy or Sad"
+            id: mood_input
+            hint_text: "Things to try: Happy, Sad or Unloved"
         Button:
             text: "Enlighten Me"
+            on_press: root.pick_mood(root.ids.mood_input.text)
         Label:
+            id: mood_feedback
             text: ""
 
 
