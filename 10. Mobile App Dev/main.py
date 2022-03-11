@@ -1,4 +1,5 @@
 import random
+from tkinter import Button
 from turtle import Screen
 from kivy.app import App
 from kivy.lang import Builder
@@ -6,6 +7,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import json, glob
 from datetime import datetime
 from pathlib import Path
+from hoverable import HoverBehavior
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 
 Builder.load_file("design.kv")
 
@@ -31,7 +35,12 @@ class SignUpScreen(Screen):
                         "created": datetime.now().strftime("%Y-%m-%d %H-%M-%S")}
         with open("users.json", "w") as file:
             json.dump(users, file)
-        self.manager.current = "sign_up_screen_success"  
+        self.manager.current = "sign_up_screen_success"
+
+    def go_back(self):
+        self.manager.transition.direction = "right"
+        self.manager.current = "login_screen"
+
 
 class SignUpScreenSuccess(Screen):
     def go_to_login_screen(self):
@@ -57,7 +66,9 @@ class LoginScreenSuccess(Screen):
             self.ids.mood_feedback.text = random.choice(quotes)
         else:
             self.ids.mood_feedback.text = "Mood not available yet, try another one!"    
-                
+
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
+    pass   
 
 
 class RootWidget(ScreenManager):
