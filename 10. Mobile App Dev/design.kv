@@ -81,9 +81,7 @@
                 on_press: root.log_out()
                 source: "logout_hover.png" if self.hovered else "logout_nothover.png"
                 size_hint: 0.35,0.35
-                pos_hint: {"center_x": 0.93, "center_y": 0.8}            
-            
-                    
+                pos_hint: {"center_x": 0.93, "center_y": 0.8}               
         Label:
             text: "How do you feel?"
         TextInput:
@@ -93,9 +91,13 @@
         Button:
             text: "Enlighten Me"
             on_press: root.pick_mood(root.ids.mood_input.text)
-        Label:
-            id: mood_feedback
-            text: ""
+        ScrollView:
+            Label:
+                id: mood_feedback
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
 
 
 <RootWidget>:
